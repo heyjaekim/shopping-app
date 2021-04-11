@@ -1,0 +1,11 @@
+version: '3'
+services:
+    djangodev:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        volumes:
+            - ../fc_django:/home/fc_django
+        ports:
+            - "8000:8000"
+        command: sleep infinity

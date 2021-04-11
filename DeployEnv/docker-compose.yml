@@ -1,0 +1,18 @@
+version: '3'
+services:
+    django_app:
+        build:
+            context: .
+            dockerfile: ./Dockerfile_django
+        volumes:
+            - ../fc_django:/home/fc_django
+        command: gunicorn --bind 0.0.0.0:8000 main.wsgi
+    nginx_proxy:
+        build:
+            context: .
+            dockerfile: ./Dockerfile_nginx
+        depends_on:
+            - django_app
+        ports:
+            - "80:80"
+        command: sleep infinity
